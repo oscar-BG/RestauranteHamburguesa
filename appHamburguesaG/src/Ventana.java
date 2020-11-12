@@ -4,9 +4,14 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event;
 public class Ventana  extends  JFrame{
 	
 	private JPanel panel;
@@ -18,6 +23,9 @@ public class Ventana  extends  JFrame{
 	private JButton btnNuevo;
 	private JTextField txtCantidad;
 	private JComboBox cbxMenu;
+	private JTable tbMenu;
+	
+	
 	public Ventana(){
 		
 		setTitle("Hamburguesa");
@@ -87,6 +95,31 @@ public class Ventana  extends  JFrame{
 		cbxMenu = new JComboBox(menu);
 		cbxMenu.setBounds(90,60,150,20);
 		panel.add(cbxMenu);
+		
+		
+		//Tabla
+		String [] nombresColumnas = {"Cantidad","Producto"};
+		Object [][] datosFila={
+		{"0","Hamburguesa"},
+		{"0","Cafe"}
+		};
+		
+		/*
+		tbMenu = new JTable(datosFila,nombresColumnas);
+		tbMenu.setBounds(10,100,300,300);
+		panel.add(tbMenu);
+		*/
+		
+		//Evento de boton btnMas
+		btnMas.addActionListener(new ActionListener(){
+			
+				public void actionPerformed(ActionEvent e){
+					//Tabla
+					tbMenu = new JTable(datosFila,nombresColumnas);
+					tbMenu.setBounds(10,100,300,300);
+					panel.add(tbMenu);	
+				}
+		});
 		
 	}
 	

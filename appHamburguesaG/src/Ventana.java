@@ -141,6 +141,14 @@ public class Ventana  extends  JFrame {
 	}
 	
 	//
+	/*
+	//Codido para capturar item
+	@Override
+	public void itemStateChanged(ItemEvent e){
+		if(e.getSourse()==cbxMenu){
+			String texItem = cbxMenu.getSelectedItem().toString();
+		}
+	}*/
 	
 	
 	

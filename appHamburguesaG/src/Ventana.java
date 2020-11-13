@@ -11,7 +11,8 @@ import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event;
+import java.awt.event.*;
+
 public class Ventana  extends  JFrame{
 	
 	private JPanel panel;
@@ -69,21 +70,7 @@ public class Ventana  extends  JFrame{
 		lblTotal.setBounds(300,420,50,20);
 		panel.add(lblTotal);
 		
-		//Agregar botones
-		btnMas = new JButton();
-		btnMas.setText("+");
-		//btnMas.setEnabled(false);//habilitar o desabilitar el boton
-		btnMas.setForeground(Color.BLUE);
-		btnMas.setFont(new Font("Forte",Font.BOLD,16));
-		btnMas.setBounds(250,60,50,20);
-		panel.add(btnMas);
 		
-		btnNuevo = new JButton();
-		btnNuevo.setText("Nueva venta");
-		btnNuevo.setForeground(Color.BLUE);
-		btnNuevo.setFont(new Font("Forte",2,16));
-		btnNuevo.setBounds(320,60,150,20);
-		panel.add(btnNuevo);
 		
 		//Cajas de texto
 		txtCantidad = new JTextField();
@@ -104,24 +91,39 @@ public class Ventana  extends  JFrame{
 		{"0","Cafe"}
 		};
 		
-		/*
+		
 		tbMenu = new JTable(datosFila,nombresColumnas);
 		tbMenu.setBounds(10,100,300,300);
 		panel.add(tbMenu);
-		*/
 		
-		//Evento de boton btnMas
-		btnMas.addActionListener(new ActionListener(){
-			
-				public void actionPerformed(ActionEvent e){
-					//Tabla
-					tbMenu = new JTable(datosFila,nombresColumnas);
-					tbMenu.setBounds(10,100,300,300);
-					panel.add(tbMenu);	
-				}
-		});
-		
+		colocarBoton();
 	}
 	
-	
+	private void colocarBoton(){
+		//Agregar botones
+		btnMas = new JButton();
+		btnMas.setText("+");
+		//btnMas.setEnabled(false);//habilitar o desabilitar el boton
+		btnMas.setForeground(Color.BLUE);
+		btnMas.setFont(new Font("Forte",Font.BOLD,16));
+		btnMas.setBounds(250,60,50,20);
+		panel.add(btnMas);
+		
+		btnNuevo = new JButton();
+		btnNuevo.setText("Nueva venta");
+		btnNuevo.setForeground(Color.BLUE);
+		btnNuevo.setFont(new Font("Forte",2,16));
+		btnNuevo.setBounds(320,60,150,20);
+		panel.add(btnNuevo);
+		
+		//Agregar un evento
+		ActionListener oyente = new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				lblTotal.setText("Total: 0");
+			}	
+		};
+		
+		btnMas.addActionListener(oyente);
+	}
 }

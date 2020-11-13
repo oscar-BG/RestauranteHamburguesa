@@ -11,9 +11,10 @@ import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class Ventana  extends  JFrame{
+public class Ventana  extends  JFrame {
 	
 	private JPanel panel;
 	private JLabel lblTitulo;
@@ -23,7 +24,7 @@ public class Ventana  extends  JFrame{
 	private JButton btnMas;
 	private JButton btnNuevo;
 	private JTextField txtCantidad;
-	private JComboBox cbxMenu;
+	private JComboBox<String> cbxMenu;
 	private JTable tbMenu;
 	public DefaultTableModel modelo;
 	public JScrollPane barra;
@@ -94,23 +95,29 @@ public class Ventana  extends  JFrame{
 		String cf = "Cafe";
 		
 		//Lista desplegable
-		String[] menu = {hm,hq,hbd,pp,ml,rf,cf};
+		//String[] menu = {hm,hq,hbd,pp,ml,rf,cf};
 		
-		cbxMenu = new JComboBox(menu);
+		cbxMenu = new JComboBox<String>();
 		cbxMenu.setBounds(90,60,150,20);
 		panel.add(cbxMenu);
 		
-		
-		//Tabla
+		cbxMenu.addItemListener(this);
+		cbxMenu.addItem(hm);
+		cbxMenu.addItem(hq);
+		cbxMenu.addItem(hbd);
+		cbxMenu.addItem(pp);
+		cbxMenu.addItem(ml);
+		cbxMenu.addItem(cf);
 		/*
-		String[] nombresColumnas = {"Cantidad","Producto","Importe","Total"};
-		
-		Object [][] datosFila={
-		};
-		
-		tbMenu = new JTable(datosFila,nombresColumnas);
-		tbMenu.setBounds(10,100,300,300);
-		panel.add(tbMenu);*/
+		//Codido para capturar item
+		//@Override
+		public void itemStateChanged(ItemEvent e){
+			if(e.getSourse()==cbxMenu){
+				String texItem = cbxMenu.getSelectedItem().toString();
+			}
+		}
+		*/
+	
 		
 		//Nuevo codigo
 		tbMenu = new JTable();
@@ -122,17 +129,19 @@ public class Ventana  extends  JFrame{
 			}	
 		};
 		tbMenu.setModel(modelo);
-		tbMenu.getColumnModel().getColumn(0).setMaxWidth(100);
-		tbMenu.getColumnModel().getColumn(1).setMaxWidth(100);
-		tbMenu.getColumnModel().getColumn(2).setMaxWidth(100);
-		tbMenu.getColumnModel().getColumn(3).setMaxWidth(100);
+		tbMenu.getColumnModel().getColumn(0).setMaxWidth(110);
+		tbMenu.getColumnModel().getColumn(1).setMaxWidth(110);
+		tbMenu.getColumnModel().getColumn(2).setMaxWidth(110);
+		tbMenu.getColumnModel().getColumn(3).setMaxWidth(110);
 		
 		barra = new JScrollPane();
-		barra.setBounds(10,100,300,300);
+		barra.setBounds(10,100,440,300);
 		panel.add(barra);
 		panel.add(tbMenu);
 		barra.setViewportView(tbMenu);
 	}
+	
+	//
 	
 	
 	
@@ -157,7 +166,8 @@ public class Ventana  extends  JFrame{
 		ActionListener oyente = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
-				lblTotal.setText("Total: 0");
+				 Object datos[]={txtCantidad.getText(),"hA","10","100"};
+				 modelo.addRow(datos);
 			}	
 		};
 		

@@ -25,6 +25,8 @@ public class Ventana  extends  JFrame{
 	private JTextField txtCantidad;
 	private JComboBox cbxMenu;
 	private JTable tbMenu;
+	public DefaultTableModel modelo;
+	public JScrollPane barra;
 	
 	
 	public Ventana(){
@@ -77,27 +79,62 @@ public class Ventana  extends  JFrame{
 		txtCantidad.setBounds(10,60,70,20);
 		panel.add(txtCantidad);
 		
+		tabla();
+		colocarBoton();
+	}
+	
+	private void tabla(){
+		
+		String hm = "Hamburguesa";
+		String hq = "Hamburguesa con queso";
+		String hbd = "Hamburguesa doble";
+		String pp = "Ordenes de papa";
+		String ml = "Malteadas";
+		String rf = "Refrescos";
+		String cf = "Cafe";
+		
 		//Lista desplegable
-		String[] menu = {"Hamburguesa","Hamburguesa con queso",};
+		String[] menu = {hm,hq,hbd,pp,ml,rf,cf};
+		
 		cbxMenu = new JComboBox(menu);
 		cbxMenu.setBounds(90,60,150,20);
 		panel.add(cbxMenu);
 		
 		
 		//Tabla
-		String [] nombresColumnas = {"Cantidad","Producto"};
-		Object [][] datosFila={
-		{"0","Hamburguesa"},
-		{"0","Cafe"}
-		};
+		/*
+		String[] nombresColumnas = {"Cantidad","Producto","Importe","Total"};
 		
+		Object [][] datosFila={
+		};
 		
 		tbMenu = new JTable(datosFila,nombresColumnas);
 		tbMenu.setBounds(10,100,300,300);
-		panel.add(tbMenu);
+		panel.add(tbMenu);*/
 		
-		colocarBoton();
+		//Nuevo codigo
+		tbMenu = new JTable();
+		String[] encabazado = {"Cantidad","Producto","Importe","Total"};
+		Object datos[][] = {};
+		modelo = new DefaultTableModel(datos,encabazado){
+			public boolean isCellEditable(int rowIndex, int vColIndex){
+				return false;
+			}	
+		};
+		tbMenu.setModel(modelo);
+		tbMenu.getColumnModel().getColumn(0).setMaxWidth(100);
+		tbMenu.getColumnModel().getColumn(1).setMaxWidth(100);
+		tbMenu.getColumnModel().getColumn(2).setMaxWidth(100);
+		tbMenu.getColumnModel().getColumn(3).setMaxWidth(100);
+		
+		barra = new JScrollPane();
+		barra.setBounds(10,100,300,300);
+		panel.add(barra);
+		panel.add(tbMenu);
+		barra.setViewportView(tbMenu);
 	}
+	
+	
 	
 	private void colocarBoton(){
 		//Agregar botones

@@ -11,8 +11,7 @@ import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 
 public class Ventana  extends  JFrame {
 	
@@ -100,14 +99,14 @@ public class Ventana  extends  JFrame {
 		cbxMenu = new JComboBox<String>();
 		cbxMenu.setBounds(90,60,150,20);
 		panel.add(cbxMenu);
-		
-		cbxMenu.addItemListener(this);
 		cbxMenu.addItem(hm);
 		cbxMenu.addItem(hq);
 		cbxMenu.addItem(hbd);
 		cbxMenu.addItem(pp);
 		cbxMenu.addItem(ml);
 		cbxMenu.addItem(cf);
+		//cbxMenu.addItemListener(this);
+		
 		/*
 		//Codido para capturar item
 		//@Override
@@ -115,8 +114,8 @@ public class Ventana  extends  JFrame {
 			if(e.getSourse()==cbxMenu){
 				String texItem = cbxMenu.getSelectedItem().toString();
 			}
-		}
-		*/
+		}*/
+		
 	
 		
 		//Nuevo codigo

@@ -15,6 +15,7 @@ import java.awt.event.*;
 
 public class Ventana  extends  JFrame {
 	
+	//Componentes
 	private JPanel panel;
 	private JLabel lblTitulo;
 	private JLabel lblCantidad;
@@ -23,11 +24,24 @@ public class Ventana  extends  JFrame {
 	private JButton btnMas;
 	private JButton btnNuevo;
 	private JTextField txtCantidad;
-	private JComboBox<String> cbxMenu;
+	private JComboBox cbxMenu;
 	private JTable tbMenu;
 	public DefaultTableModel modelo;
 	public JScrollPane barra;
 	
+	//Productos
+	private String hm = "Hamburguesa";
+	private String hq = "Hamburguesa con queso";
+	private String hbd = "Hamburguesa doble";
+	private String pp = "Ordenes de papa";
+	private String ml = "Malteadas";
+	private String rf = "Refrescos";
+	private String cf = "Cafe";
+	
+	//Presio
+	private int importe = 0;
+	private int total = 0;
+	private String cantidad = "0";
 	
 	public Ventana(){
 		
@@ -85,26 +99,13 @@ public class Ventana  extends  JFrame {
 	
 	private void tabla(){
 		
-		String hm = "Hamburguesa";
-		String hq = "Hamburguesa con queso";
-		String hbd = "Hamburguesa doble";
-		String pp = "Ordenes de papa";
-		String ml = "Malteadas";
-		String rf = "Refrescos";
-		String cf = "Cafe";
+		
 		
 		//Lista desplegable
-		//String[] menu = {hm,hq,hbd,pp,ml,rf,cf};
-		
-		cbxMenu = new JComboBox<String>();
+		String[] menu = {hm,hq,hbd,pp,ml,rf,cf};
+		cbxMenu = new JComboBox(menu);
 		cbxMenu.setBounds(90,60,150,20);
 		panel.add(cbxMenu);
-		cbxMenu.addItem(hm);
-		cbxMenu.addItem(hq);
-		cbxMenu.addItem(hbd);
-		cbxMenu.addItem(pp);
-		cbxMenu.addItem(ml);
-		cbxMenu.addItem(cf);
 		//cbxMenu.addItemListener(this);
 		
 		/*
@@ -140,17 +141,7 @@ public class Ventana  extends  JFrame {
 		barra.setViewportView(tbMenu);
 	}
 	
-	//
-	/*
-	//Codido para capturar item
-	@Override
-	public void itemStateChanged(ItemEvent e){
-		if(e.getSourse()==cbxMenu){
-			String texItem = cbxMenu.getSelectedItem().toString();
-		}
-	}*/
-	
-	
+
 	
 	private void colocarBoton(){
 		//Agregar botones
@@ -173,7 +164,30 @@ public class Ventana  extends  JFrame {
 		ActionListener oyente = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
-				 Object datos[]={txtCantidad.getText(),"hA","10","100"};
+				cantidad = txtCantidad.getText();
+				
+				if(cbxMenu.getSelectedItem() == cf){
+					importe = 5;
+				}
+				else if(cbxMenu.getSelectedItem() == hm){
+					importe = 12;
+				}
+				else if(cbxMenu.getSelectedItem() == hq){
+					importe = 15;
+				}
+				else if(cbxMenu.getSelectedItem() == hbd){
+					importe = 17;
+				}
+				else if(cbxMenu.getSelectedItem() == pp){
+					importe = 5;
+				}
+				else if(cbxMenu.getSelectedItem() == ml){
+					importe = 6;
+				}
+				else if(cbxMenu.getSelectedItem() == rf){
+					importe = 5;
+				}
+				 Object datos[]={cantidad,cbxMenu.getSelectedItem(),importe,cantidad};
 				 modelo.addRow(datos);
 			}	
 		};

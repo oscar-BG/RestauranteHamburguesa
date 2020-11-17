@@ -30,6 +30,7 @@ public class Ventana  extends  JFrame {
 	public JScrollPane barra;
 	
 	//Productos
+	private String nv = "Eligue";
 	private String hm = "Hamburguesa";
 	private String hq = "Hamburguesa con queso";
 	private String hbd = "Hamburguesa doble";
@@ -40,8 +41,11 @@ public class Ventana  extends  JFrame {
 	
 	//Presio
 	private int importe = 0;
-	private int total = 0;
 	private String cantidad = "0";
+	private int enteroC = 0;
+	private int total = 0;
+	private int totalMenu = 0;
+	private String cadenaTotal = "";
 	
 	public Ventana(){
 		
@@ -83,7 +87,7 @@ public class Ventana  extends  JFrame {
 		
 		lblTotal = new JLabel();
 		lblTotal.setText("Total");
-		lblTotal.setBounds(300,420,50,20);
+		lblTotal.setBounds(300,420,100,20);
 		panel.add(lblTotal);
 		
 		
@@ -102,22 +106,10 @@ public class Ventana  extends  JFrame {
 		
 		
 		//Lista desplegable
-		String[] menu = {hm,hq,hbd,pp,ml,rf,cf};
+		String[] menu = {nv,hm,hq,hbd,pp,ml,rf,cf};
 		cbxMenu = new JComboBox(menu);
 		cbxMenu.setBounds(90,60,150,20);
 		panel.add(cbxMenu);
-		//cbxMenu.addItemListener(this);
-		
-		/*
-		//Codido para capturar item
-		//@Override
-		public void itemStateChanged(ItemEvent e){
-			if(e.getSourse()==cbxMenu){
-				String texItem = cbxMenu.getSelectedItem().toString();
-			}
-		}*/
-		
-	
 		
 		//Nuevo codigo
 		tbMenu = new JTable();
@@ -165,33 +157,94 @@ public class Ventana  extends  JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				cantidad = txtCantidad.getText();
+				enteroC = Integer.parseInt(cantidad);
 				
 				if(cbxMenu.getSelectedItem() == cf){
 					importe = 5;
+					if(enteroC <= 100){
+						total = importe * enteroC;
+						totalMenu = total + totalMenu;
+					}
+					
 				}
 				else if(cbxMenu.getSelectedItem() == hm){
 					importe = 12;
+					if(enteroC <= 100){
+						total = importe * enteroC;
+						totalMenu = total + totalMenu;
+					}
+					
 				}
 				else if(cbxMenu.getSelectedItem() == hq){
 					importe = 15;
+					
+					if(enteroC <= 100){
+						total = importe * enteroC;
+						totalMenu = total + totalMenu;		
+					}
+					
 				}
 				else if(cbxMenu.getSelectedItem() == hbd){
 					importe = 17;
+					
+					if(enteroC <= 100){
+					total = importe * enteroC;
+					totalMenu = total + totalMenu;	
+					}
+					
 				}
 				else if(cbxMenu.getSelectedItem() == pp){
 					importe = 5;
+					
+					if(enteroC <= 100){
+						total = importe * enteroC;
+						totalMenu = total + totalMenu;
+					}
+					
 				}
 				else if(cbxMenu.getSelectedItem() == ml){
 					importe = 6;
+					if(enteroC <= 100){
+						total = importe * enteroC;
+						totalMenu = total + totalMenu;
+					}
+					
 				}
 				else if(cbxMenu.getSelectedItem() == rf){
 					importe = 5;
+					if(enteroC <= 100){
+						total = importe * enteroC;
+						totalMenu = total + totalMenu;
+					}
+					
 				}
-				 Object datos[]={cantidad,cbxMenu.getSelectedItem(),importe,cantidad};
-				 modelo.addRow(datos);
+				if(enteroC <= 100){
+					Object datos[]={cantidad,cbxMenu.getSelectedItem(),importe,total};
+				 	modelo.addRow(datos);	
+				}
+				 
+				 
+				 cadenaTotal = String.valueOf(totalMenu);
+				 lblTotal.setText("Total : " + cadenaTotal);
+				 txtCantidad.setText("");
+				 cbxMenu.setSelectedIndex(0);
 			}	
 		};
 		
+		ActionListener oyenteDos = new ActionListener(){
+			//
+			@Override
+			public void actionPerformed(ActionEvent e){
+				for (int i = 0; i< tbMenu.getRowCount(); i++){
+					modelo.removeRow(i);
+					i--;
+				}
+				lblTotal.setText("Total : 0");
+				total = 0;
+				totalMenu = 0;
+			}
+		};
 		btnMas.addActionListener(oyente);
+		btnNuevo.addActionListener(oyenteDos);
 	}
-}
+} //Fin colocarBoton

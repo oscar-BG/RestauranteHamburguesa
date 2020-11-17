@@ -11,6 +11,10 @@
 			<folderitem>
 				<path>src</path>
 			</folderitem>
+			<fileitem>
+				<path>src\Ventana.java</path>
+				<collapsedfolds>0;0;0;99;55;45</collapsedfolds>
+			</fileitem>
 		</project>
 	</projects>
 	<open_files>
